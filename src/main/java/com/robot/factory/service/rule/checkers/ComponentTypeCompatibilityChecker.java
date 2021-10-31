@@ -4,12 +4,14 @@ import com.robot.factory.exceptions.ComponentTypesIncompatibilityException;
 import com.robot.factory.model.RobotComponentType;
 import com.robot.factory.repository.RobotFactoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import java.util.EnumSet;
 
 @Service
-public class ComponentTypeCompatibilityChecker extends RuleChecker{
+@Order(3)
+public class ComponentTypeCompatibilityChecker implements RuleChecker {
 
     private RobotFactoryRepository repository;
 
@@ -19,13 +21,13 @@ public class ComponentTypeCompatibilityChecker extends RuleChecker{
     }
 
     @Override
-    public boolean check(Character[] components) {
+    public boolean check(String[] components) {
         EnumSet<RobotComponentType> types = EnumSet.noneOf(RobotComponentType.class);
-        for(Character component : components) {
+        for(String component : components) {
             types.add(repository.getComponentType(component));
         }
         if(types.size() == RobotComponentType.values().length) {
-            return checkNext(components);
+            return true;
         }
         throw new ComponentTypesIncompatibilityException("");
     }

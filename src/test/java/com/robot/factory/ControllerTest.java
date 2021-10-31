@@ -32,9 +32,9 @@ class ControllerTest {
     private static final String SERVICE_CALL_ERROR_MESSAGE = "Cannot call {} mockMvc service";
     private static final String REST_SERVICE_BASE_PATH = "/api/robot-factory";
     private static final String ORDERS_REST_SERVICE_PATH = REST_SERVICE_BASE_PATH + "/orders";
-    private final ComponentDto INSUFFICIENT_NUMBER_OF_COMPONENT_DTO = new ComponentDto(new Character[]{'I', 'A'});
-    private final ComponentDto INCOMPATIBLE_TYPES_COMPONENT_DTO = new ComponentDto(new Character[]{'B', 'A', 'I', 'H'});
-    private final ComponentDto PROPER_COMPONENT_DTO = new ComponentDto(new Character[]{'I', 'A', 'D', 'F'});
+    private final ComponentDto INSUFFICIENT_NUMBER_OF_COMPONENT_DTO = new ComponentDto(new String[]{"I", "A"});
+    private final ComponentDto INCOMPATIBLE_TYPES_COMPONENT_DTO = new ComponentDto(new String[]{"B", "A", "I", "H"});
+    private final ComponentDto PROPER_COMPONENT_DTO = new ComponentDto(new String[]{"I", "A", "D", "F"});
 
     @MockBean
     RobotFactoryService robotFactoryService;

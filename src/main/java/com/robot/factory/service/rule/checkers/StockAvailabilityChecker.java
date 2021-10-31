@@ -4,10 +4,12 @@ import com.robot.factory.exceptions.ComponentOutOfStockException;
 import com.robot.factory.exceptions.InvalidComponentException;
 import com.robot.factory.repository.RobotFactoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StockAvailabilityChecker extends RuleChecker{
+@Order(2)
+public class StockAvailabilityChecker implements RuleChecker{
     private RobotFactoryRepository repository;
 
     @Autowired
@@ -16,11 +18,11 @@ public class StockAvailabilityChecker extends RuleChecker{
     }
 
     @Override
-    public boolean check(Character[] components) throws InvalidComponentException {
-        for(Character component : components) {
+    public boolean check(String[] components) throws InvalidComponentException {
+        for(String component : components) {
             if(!repository.isStockAvailable(component))
                 throw new ComponentOutOfStockException(String.valueOf(component));
         }
-        return checkNext(components);
+        return true;
     }
 }

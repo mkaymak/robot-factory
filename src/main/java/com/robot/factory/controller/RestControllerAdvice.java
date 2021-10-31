@@ -29,7 +29,7 @@ public class RestControllerAdvice {
     private final String NUMBER_OF_REQUIRED_COMPONENT_MESSAGE = String.valueOf(RobotComponentType.values().length);
     private final String INSUFFICIENT_NUMBER_OF_COMPONENTS_EXCEPTION_MESSAGE =
             "Requested order components number is not sufficient to build a robot, " +
-                    "Expected: " + NUMBER_OF_REQUIRED_COMPONENT_MESSAGE + "Found: ";
+                    "Expected: " + NUMBER_OF_REQUIRED_COMPONENT_MESSAGE + " Found: ";
     private String GLOBAL_EXCEPTION_MESSAGE = "An exception occurred: ";
 
     BiFunction<String, WebRequest, ErrorResponse> createErrorResponse = (exception, request) ->

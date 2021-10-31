@@ -1,9 +1,13 @@
 package com.robot.factory.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
+@NoArgsConstructor
+@Getter
 public class Order {
-    String id;
-    Double price;
+    private String id;
+    private Double price;
 }

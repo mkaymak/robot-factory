@@ -1,8 +1,7 @@
 package com.robot.factory.controller;
 
-import com.robot.factory.exceptions.ComponentTypesIncompatibilityException;
-import com.robot.factory.exceptions.NumberOfComponentsIsNotSufficientException;
 import com.robot.factory.model.ComponentDto;
+import com.robot.factory.model.Order;
 import com.robot.factory.service.RobotFactoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/api/robot-factory", produces = "text/plain;charset=UTF-8")
+@RequestMapping(value = "/api/robot-factory")
 public class RobotFactoryController {
 
     RobotFactoryService robotFactoryService;
@@ -23,10 +22,8 @@ public class RobotFactoryController {
         this.robotFactoryService = robotFactoryService;
     }
 
-    @PostMapping("/orders")
-    public ResponseEntity convertToUrl(@RequestBody ComponentDto component)
-                                                throws NumberOfComponentsIsNotSufficientException,
-                                                        ComponentTypesIncompatibilityException{
+    @PostMapping(value = "/orders")
+    public ResponseEntity<Order> convertToUrl(@RequestBody ComponentDto component) {
         return new ResponseEntity<>(robotFactoryService.createOrder(component), HttpStatus.CREATED);
     }
 }

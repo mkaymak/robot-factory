@@ -29,46 +29,45 @@ class ComponentTypeCompatibilityCheckerTest {
 
     @BeforeEach
     void setUp() {
-        when(repository.getComponentType('D')).thenReturn(RobotComponentType.ARM);
-        when(repository.getComponentType('E')).thenReturn(RobotComponentType.ARM);
-        when(repository.getComponentType('A')).thenReturn(RobotComponentType.FACE);
-        when(repository.getComponentType('B')).thenReturn(RobotComponentType.FACE);
-        when(repository.getComponentType('C')).thenReturn(RobotComponentType.FACE);
-        when(repository.getComponentType('I')).thenReturn(RobotComponentType.MATERIAL);
-        when(repository.getComponentType('J')).thenReturn(RobotComponentType.MATERIAL);
-        when(repository.getComponentType('F')).thenReturn(RobotComponentType.MOBILITY);
-        when(repository.getComponentType('G')).thenReturn(RobotComponentType.MOBILITY);
-        when(repository.getComponentType('G')).thenReturn(RobotComponentType.MOBILITY);
-        when(repository.getComponentType('H')).thenReturn(RobotComponentType.MOBILITY);
+        when(repository.getComponentType("D")).thenReturn(RobotComponentType.ARM);
+        when(repository.getComponentType("E")).thenReturn(RobotComponentType.ARM);
+        when(repository.getComponentType("A")).thenReturn(RobotComponentType.FACE);
+        when(repository.getComponentType("B")).thenReturn(RobotComponentType.FACE);
+        when(repository.getComponentType("C")).thenReturn(RobotComponentType.FACE);
+        when(repository.getComponentType("I")).thenReturn(RobotComponentType.MATERIAL);
+        when(repository.getComponentType("J")).thenReturn(RobotComponentType.MATERIAL);
+        when(repository.getComponentType("F")).thenReturn(RobotComponentType.MOBILITY);
+        when(repository.getComponentType("G")).thenReturn(RobotComponentType.MOBILITY);
+        when(repository.getComponentType("H")).thenReturn(RobotComponentType.MOBILITY);
     }
 
     @ParameterizedTest
     @MethodSource("provideCompatibleComponentCodes")
-    void shouldReturnTrueIfAllComponentTypesAreCompatible(Character[] input, boolean expected) {
+    void shouldReturnTrueIfAllComponentTypesAreCompatible(String[] input, boolean expected) {
         assertThat(expected).isEqualTo(checker.check(input));
     }
 
     @ParameterizedTest
     @MethodSource("provideIncompatibleComponentCodes")
-    void shouldThrowExceptionWhenOneOfTheComponentTypeOccursMoreThanOnce(Character[] input) {
+    void shouldThrowExceptionWhenOneOfTheComponentTypeOccursMoreThanOnce(String[] input) {
         assertThatThrownBy(() -> checker.check(input)).isInstanceOf(ComponentTypesIncompatibilityException.class);
     }
 
     private static Stream<Arguments> provideCompatibleComponentCodes() {
         return Stream.of(
-                Arguments.of(new Character[]{'I', 'A', 'D', 'F'}, true),
-                Arguments.of(new Character[]{'I', 'B', 'D', 'G'}, true),
-                Arguments.of(new Character[]{'J', 'H', 'E', 'C'}, true),
-                Arguments.of(new Character[]{'B', 'D', 'H', 'J'}, true)
+                Arguments.of(new String[]{"I", "A", "D", "F"}, true),
+                Arguments.of(new String[]{"I", "B", "D", "G"}, true),
+                Arguments.of(new String[]{"J", "H", "E", "C"}, true),
+                Arguments.of(new String[]{"B", "D", "H", "J"}, true)
         );
     }
 
     private static Stream<Arguments> provideIncompatibleComponentCodes() {
         return Stream.of(
-                Arguments.of(new Character[]{'I', 'J', 'D', 'F'}, false),
-                Arguments.of(new Character[]{'F', 'G', 'H', 'D'}, false),
-                Arguments.of(new Character[]{'J', 'I', 'E', 'C'}, false),
-                Arguments.of(new Character[]{'A', 'B', 'H', 'J'}, false)
+                Arguments.of(new String[]{"I", "J", "D", "F"}, false),
+                Arguments.of(new String[]{"F", "G", "H", "D"}, false),
+                Arguments.of(new String[]{"J", "I", "E", "C"}, false),
+                Arguments.of(new String[]{"A", "B", "H", "J"}, false)
         );
     }
 }

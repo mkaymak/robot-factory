@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RobotFactoryRepository {
-    public boolean isStockAvailable(Character component) {
+    public boolean isStockAvailable(String component) {
         if(RobotStockEntity.robotStock.containsKey(component)) {
            return RobotStockEntity.robotStock.get(component).isStockAvailable();
         }
         throw new InvalidComponentException(String.valueOf(component));
     }
 
-    public RobotComponentType getComponentType(Character component) {
+    public RobotComponentType getComponentType(String component) {
         if(RobotStockEntity.robotStock.containsKey(component)) {
             return RobotStockEntity.robotStock.get(component).getType();
         }

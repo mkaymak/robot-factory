@@ -28,33 +28,33 @@ class StockAvailabilityCheckerTest {
 
     @ParameterizedTest
     @MethodSource("provideAvailableStockedComponentCodes")
-    void shouldReturnTrueIfAllComponentHasAvailableStock(Character[] input, boolean expected) {
+    void shouldReturnTrueIfAllComponentHasAvailableStock(String[] input, boolean expected) {
         when(repository.isStockAvailable(any())).thenReturn(true);
         assertThat(expected).isEqualTo(checker.check(input));
     }
 
     @ParameterizedTest
     @MethodSource("provideUnavailableStockedComponentCodes")
-    void shouldThrowExceptionIfOneOfTheComponentHasNoStock(Character[] input) {
+    void shouldThrowExceptionIfOneOfTheComponentHasNoStock(String[] input) {
         when(repository.isStockAvailable(any())).thenReturn(false);
         assertThatThrownBy(() -> checker.check(input)).isInstanceOf(ComponentOutOfStockException.class);
     }
 
     private static Stream<Arguments> provideAvailableStockedComponentCodes() {
         return Stream.of(
-                Arguments.of(new Character[]{'I', 'A', 'D', 'F'}, true),
-                Arguments.of(new Character[]{'I', 'B', 'D', 'G'}, true),
-                Arguments.of(new Character[]{'J', 'H', 'E', 'C'}, true),
-                Arguments.of(new Character[]{'B', 'D', 'H', 'J'}, true)
+                Arguments.of(new String[]{"I", "A", "D", "F"}, true),
+                Arguments.of(new String[]{"I", "B", "D", "G"}, true),
+                Arguments.of(new String[]{"J", "H", "E", "C"}, true),
+                Arguments.of(new String[]{"B", "D", "H", "J"}, true)
         );
     }
 
     private static Stream<Arguments> provideUnavailableStockedComponentCodes() {
         return Stream.of(
-                Arguments.of(new Character[]{'I', 'C', 'D', 'F'}, false),
-                Arguments.of(new Character[]{'I', 'C', 'D', 'G'}, false),
-                Arguments.of(new Character[]{'J', 'H', 'E', 'C'}, false),
-                Arguments.of(new Character[]{'C', 'D', 'H', 'J'}, false)
+                Arguments.of(new String[]{"I", "C", "D", "F"}, false),
+                Arguments.of(new String[]{"I", "C", "D", "G"}, false),
+                Arguments.of(new String[]{"J", "H", "E", "C"}, false),
+                Arguments.of(new String[]{"C", "D", "H", "J"}, false)
         );
     }
 }
