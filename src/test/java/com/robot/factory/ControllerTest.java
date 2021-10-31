@@ -18,10 +18,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.util.Arrays;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -36,9 +32,9 @@ class ControllerTest {
     private static final String SERVICE_CALL_ERROR_MESSAGE = "Cannot call {} mockMvc service";
     private static final String REST_SERVICE_BASE_PATH = "/api/robot-factory";
     private static final String ORDERS_REST_SERVICE_PATH = REST_SERVICE_BASE_PATH + "/orders";
-    private final ComponentDto INSUFFICIENT_NUMBER_OF_COMPONENT_DTO = new ComponentDto(Arrays.asList('I', 'A'));
-    private final ComponentDto INCOMPATIBLE_TYPES_COMPONENT_DTO = new ComponentDto(Arrays.asList('B', 'A', 'I', 'H'));
-    private final ComponentDto PROPER_COMPONENT_DTO = new ComponentDto(Arrays.asList('I', 'A', 'D', 'F'));
+    private final ComponentDto INSUFFICIENT_NUMBER_OF_COMPONENT_DTO = new ComponentDto(new Character[]{'I', 'A'});
+    private final ComponentDto INCOMPATIBLE_TYPES_COMPONENT_DTO = new ComponentDto(new Character[]{'B', 'A', 'I', 'H'});
+    private final ComponentDto PROPER_COMPONENT_DTO = new ComponentDto(new Character[]{'I', 'A', 'D', 'F'});
 
     @MockBean
     RobotFactoryService robotFactoryService;
