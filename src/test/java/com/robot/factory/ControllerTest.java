@@ -6,7 +6,7 @@ import com.robot.factory.exceptions.ComponentTypesIncompatibilityException;
 import com.robot.factory.exceptions.NumberOfComponentsIsNotSufficientException;
 import com.robot.factory.model.ComponentDto;
 import com.robot.factory.model.Order;
-import com.robot.factory.service.RobotFactoryService;
+import com.robot.factory.service.OrderService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
@@ -37,14 +37,14 @@ class ControllerTest {
     private final ComponentDto PROPER_COMPONENT_DTO = new ComponentDto(new String[]{"I", "A", "D", "F"});
 
     @MockBean
-    RobotFactoryService robotFactoryService;
+    OrderService orderService;
 
     @Autowired
     MockMvc mockMvc;
 
     @Test
     void shouldReturnErrorResponseWhenNumberOfComponentsIsNotSufficient() {
-        when(robotFactoryService.createOrder(any())).thenThrow(NumberOfComponentsIsNotSufficientException.class);
+        when(orderService.createOrder(any())).thenThrow(NumberOfComponentsIsNotSufficientException.class);
         try {
             this.mockMvc.perform(post(ORDERS_REST_SERVICE_PATH).contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(INSUFFICIENT_NUMBER_OF_COMPONENT_DTO)))
@@ -56,7 +56,7 @@ class ControllerTest {
 
     @Test
     void shouldReturnErrorResponseWhenComponentTypesAreIncompatible() {
-        when(robotFactoryService.createOrder(any())).thenThrow(ComponentTypesIncompatibilityException.class);
+        when(orderService.createOrder(any())).thenThrow(ComponentTypesIncompatibilityException.class);
         try {
             this.mockMvc.perform(post(ORDERS_REST_SERVICE_PATH).contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(INCOMPATIBLE_TYPES_COMPONENT_DTO)))
@@ -68,8 +68,8 @@ class ControllerTest {
 
     @Test
     void shouldReturnCreatedOrderWhenCorrectInputProvided(){
-        Order mockOrder = new Order("ID", 160.11);
-        when(robotFactoryService.createOrder(any())).thenReturn(mockOrder);
+        Order mockOrder = new Order(160.11, new String[]{"I", "A", "D", "F"});
+        when(orderService.createOrder(any())).thenReturn(mockOrder);
         try {
             this.mockMvc.perform(post(ORDERS_REST_SERVICE_PATH).contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(PROPER_COMPONENT_DTO)))

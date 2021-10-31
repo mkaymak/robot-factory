@@ -2,7 +2,7 @@ package com.robot.factory.service.rule.checkers;
 
 import com.robot.factory.exceptions.ComponentOutOfStockException;
 import com.robot.factory.exceptions.InvalidComponentException;
-import com.robot.factory.repository.RobotFactoryRepository;
+import com.robot.factory.model.RobotFactoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Order(2)
 public class StockAvailabilityChecker implements RuleChecker{
-    private RobotFactoryRepository repository;
+    private final RobotFactoryRepository repository;
 
     @Autowired
     public StockAvailabilityChecker(RobotFactoryRepository repository) {

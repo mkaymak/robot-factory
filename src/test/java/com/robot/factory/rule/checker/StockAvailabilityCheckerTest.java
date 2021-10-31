@@ -1,7 +1,7 @@
 package com.robot.factory.rule.checker;
 
 import com.robot.factory.exceptions.ComponentOutOfStockException;
-import com.robot.factory.repository.RobotFactoryRepository;
+import com.robot.factory.model.RobotFactoryRepository;
 import com.robot.factory.service.rule.checkers.StockAvailabilityChecker;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

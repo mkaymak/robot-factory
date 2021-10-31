@@ -2,7 +2,7 @@ package com.robot.factory.service.rule.checkers;
 
 import com.robot.factory.exceptions.ComponentTypesIncompatibilityException;
 import com.robot.factory.model.RobotComponentType;
-import com.robot.factory.repository.RobotFactoryRepository;
+import com.robot.factory.model.RobotFactoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.EnumSet;
 @Order(3)
 public class ComponentTypeCompatibilityChecker implements RuleChecker {
 
-    private RobotFactoryRepository repository;
+    private final RobotFactoryRepository repository;
 
     @Autowired
     public ComponentTypeCompatibilityChecker(RobotFactoryRepository repository) {

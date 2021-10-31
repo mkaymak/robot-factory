@@ -2,7 +2,7 @@ package com.robot.factory.rule.checker;
 
 import com.robot.factory.exceptions.ComponentTypesIncompatibilityException;
 import com.robot.factory.model.RobotComponentType;
-import com.robot.factory.repository.RobotFactoryRepository;
+import com.robot.factory.model.RobotFactoryRepository;
 import com.robot.factory.service.rule.checkers.ComponentTypeCompatibilityChecker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;

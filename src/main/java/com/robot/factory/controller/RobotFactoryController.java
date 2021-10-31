@@ -2,7 +2,7 @@ package com.robot.factory.controller;
 
 import com.robot.factory.model.ComponentDto;
 import com.robot.factory.model.Order;
-import com.robot.factory.service.RobotFactoryService;
+import com.robot.factory.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/robot-factory")
 public class RobotFactoryController {
 
-    RobotFactoryService robotFactoryService;
+    OrderService orderService;
 
     @Autowired
-    public RobotFactoryController(RobotFactoryService robotFactoryService) {
-        this.robotFactoryService = robotFactoryService;
+    public RobotFactoryController(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     @PostMapping(value = "/orders")
-    public ResponseEntity<Order> convertToUrl(@RequestBody ComponentDto component) {
-        return new ResponseEntity<>(robotFactoryService.createOrder(component), HttpStatus.CREATED);
+    public ResponseEntity<Order> createOrder(@RequestBody ComponentDto component) {
+        return new ResponseEntity<>(orderService.createOrder(component), HttpStatus.CREATED);
     }
 }
