@@ -34,14 +34,14 @@ If an order is valid and there are enough parts to assemble the robot:
 * `POST /api/robot-factory/orders`
     * Body of the request:  `{ "components": ["I","A","D","F"] }`
     * Result is an order id and the total price of the components
-      and if the components are not compatible with the given rules, <br /> 
+      and if the components are not compatible with the given rules,
       the order cannot be created and appropriate HTTP status will be sent (like Bad Request or Internal Server Error)
       * A successful result: `201 {"order_id": "some-id", "total": 160.11 }`
 
 ### Design Decisions
 * Chain of Responsibility design pattern was applied for determining whether the requested component codes are applicable.
   <br /> If one of the rules cannot be applied (e.g number of components is not 4), it throws the related exception and the chain could not continue.
-* Global exception handling by the help of AOP for reusability.
+* Global exception handling and logging by the help of AOP for reusability.
 * For extending testing in a variety of scenarios, parameterized tests were used.
 * For each rule, a custom exception was created.
 * HashMaps were used instead of a database (persistence was not included in the scope of the challenge ) <br /> 
